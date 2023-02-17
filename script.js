@@ -37,10 +37,20 @@ num.forEach(function(number){
 
 operator.forEach(function(op){
     op.addEventListener("click", function(){
+        sign = op.innerHTML
         if (!(display.innerHTML.trim() === "")){
             operatorClick = true
-            foundnum1 = true
-            sign = op.innerHTML
+            if (!foundnum1){
+                foundnum1 = true
+            }
+            else if (foundnum1){
+                console.log("found first two numbers")
+                calculate()
+                foundnum1 = true
+                foundnum2 = false
+                num1 = display.innerHTML
+                num2 = "0"
+            }
             console.log(operatorClick)
         }
 
@@ -48,7 +58,19 @@ operator.forEach(function(op){
 })
 
 equal.addEventListener("click", function(){
-    if(sign === "+"){
+    calculate()
+    equaled = true
+    operatorClick = false
+    foundnum1 = false
+    foundnum2 = false
+    num1 = 0
+    num2 = 0
+})
+
+function calculate(){
+    console.log("num1", num1)
+    console.log("num2", num2)
+    if (sign === "+"){
         display.innerHTML = add(parseInt(num1), parseInt(num2))
     }
     else if (sign === "-"){
@@ -60,13 +82,8 @@ equal.addEventListener("click", function(){
     else if (sign === "/"){
         display.innerHTML = divide(parseInt(num1), parseInt(num2))
     }
-    equaled = true
-    operatorClick = false
-    foundnum1 = false
-    foundnum2 = false
-    num1 = 0
-    num2 = 0
-})
+
+}
 
 clear.addEventListener("click", function(){
     display.innerHTML = ""
@@ -108,9 +125,9 @@ function operate(operator, a, b){
     }
 }
 
-
-
-console.log(add(1, 2))
-console.log(subtract(3, 2))
-console.log(multiply(2, 4))
-console.log(divide(6, 2))
+//
+//
+// console.log(add(1, 2))
+// console.log(subtract(3, 2))
+// console.log(multiply(2, 4))
+// console.log(divide(6, 2))
