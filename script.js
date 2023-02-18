@@ -3,6 +3,7 @@ const num = document.querySelectorAll(".num")
 const display = document.getElementById("display")
 const clear = document.getElementById("clear")
 const operator = document.querySelectorAll(".operator")
+const paper = document.getElementById("paper")
 var num1 = 0
 var num2 = 0
 var operatorClick = false
@@ -10,6 +11,7 @@ var foundnum1 = false
 var foundnum2 = false
 var equaled = false
 var sign = "0"
+var homework_string = ""
 
 num.forEach(function(number){
     number.addEventListener("click", function(){
@@ -75,26 +77,46 @@ function calculate(){
     console.log("num1", num1)
     console.log("num2", num2)
     if (sign === "+"){
+        paper.innerHTML += num1
+        paper.innerHTML += " + "
+        paper.innerHTML += num2
         console.log("calculating", num1, "+", num2)
         rslt = add(parseInt(num1), parseInt(num2))
+        paper.innerHTML += " = "
+        paper.innerHTML += rslt + "<br />"
         display.innerHTML = rslt
         return rslt
     }
     else if (sign === "-"){
+        paper.innerHTML += num1
+        paper.innerHTML += " - "
+        paper.innerHTML += num2
         console.log("calculating", num1, "-", num2)
         rslt = subtract(parseInt(num1), parseInt(num2))
+        paper.innerHTML += " = "
+        paper.innerHTML += rslt + "<br />"
         display.innerHTML = rslt
         return rslt
     }
     else if (sign === "*"){
+        paper.innerHTML += num1
+        paper.innerHTML += " * "
+        paper.innerHTML += num2
         console.log("calculating", num1, "*", num2)
         rslt = multiply(parseInt(num1), parseInt(num2))
+        paper.innerHTML += " = "
+        paper.innerHTML += rslt + "<br />"
         display.innerHTML = rslt
         return rslt
     }
     else if (sign === "/"){
+        paper.innerHTML += num1
+        paper.innerHTML += " / "
+        paper.innerHTML += num2
         console.log("calculating", num1, "/", num2)
         rslt = divide(parseInt(num1), parseInt(num2))
+        paper.innerHTML += " = "
+        paper.innerHTML += rslt + "<br />"
         display.innerHTML = rslt
         return rslt
     }

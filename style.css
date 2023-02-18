@@ -1,11 +1,19 @@
 body{
-    background-color: darkslategrey;
+    background-color: antiquewhite;
+    background-image: url("https://llobe.com/wp-content/uploads/2015/02/desk-background-images.jpg");
+    background-repeat: no-repeat;
+    /*background-size: 100% auto;*/
+    background-size: cover;
+}
+.container{
+    display: flex;
 }
 
 .calc-container{
-    background-color: lightsteelblue;
+    background-color: lightgray;
+    /*background-color: lightsteelblue;*/
     top: 10%; /* IMPORTANT */
-    left: 35%; /* IMPORTANT */
+    left: 24%; /* IMPORTANT */
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -23,7 +31,7 @@ body{
     padding: 4rem 1rem 1rem 0.6rem;
 }
 .button{
-    background-color: beige;
+    background-color: white;
     padding: 1.5rem;
     border-radius: 5px;
     font-size: larger;
@@ -38,7 +46,7 @@ body{
     background-color: silver;
 }
 .num-display{
-    background-color: beige;
+    background-color: white;
     padding: 1.5rem;
     border-radius: 5px;
     font-size: larger;
@@ -58,4 +66,23 @@ body{
 }
 .operator:hover{
     background-color:#5A5A5A;
+}
+
+.paper{
+    font-family: 'Kalam', cursive;
+    background-color: oldlace;
+    color: #5A5A5A;
+    background-image: url("https://samplewords.com/wp-content/uploads/2010/03/home-writing-paper-thumb.jpg");
+    background-repeat: no-repeat;
+    top: 40%; /* IMPORTANT */
+    left: 80%; /* IMPORTANT */
+    display: block;
+    position: absolute;
+    width: 300px;
+    height: 417px;
+    padding: 3rem;
+    border-radius: 1px;
+
+    margin-top: -208.5px; /* HALF OF THE HEIGHT */
+    margin-left: -375px; /* HALF OF THE WIDTH */
 }
