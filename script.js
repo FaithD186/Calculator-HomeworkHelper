@@ -21,6 +21,7 @@ num.forEach(function(number){
             equaled = false
             display.innerHTML = number.innerHTML
         }
+        operatorClick = false
         // if (!(operatorClick)){
         //     if (equaled === true){
         //         display.innerHTML = number.innerHTML
@@ -46,8 +47,9 @@ num.forEach(function(number){
 })
 operator.forEach(function(op){
     op.addEventListener("click", function(){
-        if (!(equaled)){
+        if (!(equaled) && !(operatorClick)){
             display.innerHTML += op.innerHTML
+            operatorClick = true
         }
         // if (!(display.innerHTML.trim() === "")){
         //     operatorClick = true
