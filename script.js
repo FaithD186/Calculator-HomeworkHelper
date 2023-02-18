@@ -32,27 +32,31 @@ num.forEach(function(number){
         else{
             num2 += number.innerHTML
         }
+        console.log("num1", num1)
+        console.log("num2", num2)
     })
 })
 
 operator.forEach(function(op){
     op.addEventListener("click", function(){
-        sign = op.innerHTML
         if (!(display.innerHTML.trim() === "")){
             operatorClick = true
             if (!foundnum1){
                 foundnum1 = true
+                operatorClick = true
+                sign = op.innerHTML
             }
             else if (foundnum1){
                 console.log("found first two numbers")
-                calculate()
+                var rslt = calculate()
                 foundnum1 = true
                 foundnum2 = false
-                num1 = display.innerHTML
-                num2 = "0"
+                num1 = rslt
+                num2 = 0
+                sign = op.innerHTML
             }
-            console.log(operatorClick)
         }
+        console.log(sign)
 
     })
 })
@@ -71,16 +75,28 @@ function calculate(){
     console.log("num1", num1)
     console.log("num2", num2)
     if (sign === "+"){
-        display.innerHTML = add(parseInt(num1), parseInt(num2))
+        console.log("calculating", num1, "+", num2)
+        rslt = add(parseInt(num1), parseInt(num2))
+        display.innerHTML = rslt
+        return rslt
     }
     else if (sign === "-"){
-        display.innerHTML = subtract(parseInt(num1), parseInt(num2))
+        console.log("calculating", num1, "-", num2)
+        rslt = subtract(parseInt(num1), parseInt(num2))
+        display.innerHTML = rslt
+        return rslt
     }
     else if (sign === "*"){
-        display.innerHTML = multiply(parseInt(num1), parseInt(num2))
+        console.log("calculating", num1, "*", num2)
+        rslt = multiply(parseInt(num1), parseInt(num2))
+        display.innerHTML = rslt
+        return rslt
     }
     else if (sign === "/"){
-        display.innerHTML = divide(parseInt(num1), parseInt(num2))
+        console.log("calculating", num1, "/", num2)
+        rslt = divide(parseInt(num1), parseInt(num2))
+        display.innerHTML = rslt
+        return rslt
     }
 
 }
@@ -90,6 +106,8 @@ clear.addEventListener("click", function(){
     foundnum1 = false
     foundnum2 = false
     operatorClick = false
+    num1 = 0
+    num2 = 0
 
 })
 
