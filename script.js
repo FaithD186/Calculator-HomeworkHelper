@@ -10,67 +10,80 @@ var operatorClick = false
 var foundnum1 = false
 var foundnum2 = false
 var equaled = false
-var sign = "0"
 var line_counter = 0
 
 num.forEach(function(number){
     number.addEventListener("click", function(){
-        if (!(operatorClick)){
-            if (equaled === true){
-                display.innerHTML = number.innerHTML
-                equaled = false
-            } else{
-                display.innerHTML += number.innerHTML
-            }
-        }
-        else if (operatorClick){
-            display.innerHTML = number.innerHTML
-            operatorClick = false
-        }
 
-        if (!(foundnum1)){
-            num1 += number.innerHTML
+        if (!(equaled)){
+            display.innerHTML += number.innerHTML
+        }else{
+            equaled = false
+            display.innerHTML = number.innerHTML
         }
-        else{
-            num2 += number.innerHTML
-        }
-        console.log("num1", num1)
-        console.log("num2", num2)
+        // if (!(operatorClick)){
+        //     if (equaled === true){
+        //         display.innerHTML = number.innerHTML
+        //         equaled = false
+        //     } else{
+        //         display.innerHTML += number.innerHTML
+        //     }
+        // }
+        // else if (operatorClick){
+        //     display.innerHTML = number.innerHTML
+        //     operatorClick = false
+        // }
+        //
+        // if (!(foundnum1)){
+        //     num1 += number.innerHTML
+        // }
+        // else{
+        //     num2 += number.innerHTML
+        // }
+        // console.log("num1", num1)
+        // console.log("num2", num2)
     })
 })
-
 operator.forEach(function(op){
     op.addEventListener("click", function(){
-        if (!(display.innerHTML.trim() === "")){
-            operatorClick = true
-            if (!foundnum1){
-                foundnum1 = true
-                operatorClick = true
-                sign = op.innerHTML
-            }
-            else if (foundnum1){
-                console.log("found first two numbers")
-                var rslt = calculate()
-                foundnum1 = true
-                foundnum2 = false
-                num1 = rslt
-                num2 = 0
-                sign = op.innerHTML
-            }
+        if (!(equaled)){
+            display.innerHTML += op.innerHTML
         }
-        console.log(sign)
+        // if (!(display.innerHTML.trim() === "")){
+        //     operatorClick = true
+        //     if (!foundnum1){
+        //         foundnum1 = true
+        //         operatorClick = true
+        //         sign = op.innerHTML
+        //     }
+        //     else if (foundnum1){
+        //         console.log("found first two numbers")
+        //         var rslt = calculate()
+        //         foundnum1 = true
+        //         foundnum2 = false
+        //         num1 = rslt
+        //         num2 = 0
+        //         sign = op.innerHTML
+        //     }
+        // }
+        // console.log(sign)
 
     })
 })
 
 equal.addEventListener("click", function(){
-    calculate()
+    paper.innerHTML += display.innerHTML + " = "
+    rslt = eval(display.innerHTML)
+    display.innerHTML = rslt
+    paper.innerHTML += rslt + "<br />"
+    // calculate()
     equaled = true
-    operatorClick = false
-    foundnum1 = false
-    foundnum2 = false
-    num1 = 0
-    num2 = 0
+
+    // operatorClick = false
+    // foundnum1 = false
+    // foundnum2 = false
+    // num1 = 0
+    // num2 = 0
 })
 
 function calculate(){
