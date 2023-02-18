@@ -11,7 +11,7 @@ var foundnum1 = false
 var foundnum2 = false
 var equaled = false
 var sign = "0"
-var homework_string = ""
+var line_counter = 0
 
 num.forEach(function(number){
     number.addEventListener("click", function(){
@@ -76,6 +76,10 @@ equal.addEventListener("click", function(){
 function calculate(){
     console.log("num1", num1)
     console.log("num2", num2)
+    if (line_counter === 15){
+        paper.innerHTML = "Grade 1 Math Homework" + "<br />" + "<br />"
+        line_counter = 0
+    }
     if (sign === "+"){
         paper.innerHTML += num1
         paper.innerHTML += " + "
@@ -85,6 +89,7 @@ function calculate(){
         paper.innerHTML += " = "
         paper.innerHTML += rslt + "<br />"
         display.innerHTML = rslt
+        line_counter += 1
         return rslt
     }
     else if (sign === "-"){
@@ -96,6 +101,7 @@ function calculate(){
         paper.innerHTML += " = "
         paper.innerHTML += rslt + "<br />"
         display.innerHTML = rslt
+        line_counter += 1
         return rslt
     }
     else if (sign === "*"){
@@ -107,6 +113,7 @@ function calculate(){
         paper.innerHTML += " = "
         paper.innerHTML += rslt + "<br />"
         display.innerHTML = rslt
+        line_counter += 1
         return rslt
     }
     else if (sign === "/"){
@@ -118,6 +125,7 @@ function calculate(){
         paper.innerHTML += " = "
         paper.innerHTML += rslt + "<br />"
         display.innerHTML = rslt
+        line_counter += 1
         return rslt
     }
 

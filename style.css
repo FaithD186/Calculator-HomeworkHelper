@@ -1,8 +1,10 @@
 body{
-    background-color: antiquewhite;
-    background-image: url("https://llobe.com/wp-content/uploads/2015/02/desk-background-images.jpg");
+    background-color: #cbdfbd;
+    /*background-image: url("https://llobe.com/wp-content/uploads/2015/02/desk-background-images.jpg");*/
     background-repeat: no-repeat;
     /*background-size: 100% auto;*/
+    background-position: center center;
+    background-attachment: fixed;
     background-size: cover;
 }
 .container{
@@ -10,7 +12,9 @@ body{
 }
 
 .calc-container{
-    background-color: lightgray;
+    flex: 1;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: #eaf4f4;
     /*background-color: lightsteelblue;*/
     top: 10%; /* IMPORTANT */
     left: 24%; /* IMPORTANT */
@@ -21,7 +25,7 @@ body{
     height: 500px;
     padding: 2rem;
     border-radius: 5px;
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
 
 }
 .button-container{
@@ -51,17 +55,17 @@ body{
     border-radius: 5px;
     font-size: larger;
     height: 1rem;
-    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+    box-shadow: rgb(179, 194, 203) 3px 3px 6px 0px inset, rgba(194, 193, 193, 0.5) -3px -3px 6px 1px inset;
 
 }
 #equal{
-    background-color: dodgerblue;
+    background-color: #99c1de;
 }
 #clear{
-    background-color: lightcoral;
+    background-color: #ff99ac;
 }
 .operator{
-    background-color: slategrey;
+    background-color: #6b9080;
     color: whitesmoke;
 }
 .operator:hover{
@@ -69,20 +73,23 @@ body{
 }
 
 .paper{
+    flex: 1;
     font-family: 'Kalam', cursive;
     background-color: oldlace;
     color: #5A5A5A;
     background-image: url("https://samplewords.com/wp-content/uploads/2010/03/home-writing-paper-thumb.jpg");
     background-repeat: no-repeat;
     top: 40%; /* IMPORTANT */
-    left: 80%; /* IMPORTANT */
+    left: 230%; /* IMPORTANT */
     display: block;
     position: absolute;
-    width: 300px;
+    width: 250px;
     height: 417px;
     padding: 3rem;
     border-radius: 1px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 
     margin-top: -208.5px; /* HALF OF THE HEIGHT */
     margin-left: -375px; /* HALF OF THE WIDTH */
+    transform: rotate(-0.03turn);
 }
