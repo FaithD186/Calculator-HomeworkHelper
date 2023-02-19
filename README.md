@@ -1,6 +1,8 @@
 # calculator
 
-Calculator, built using Javascript, CSS grid, HTML. 
+Help a first grader with their math homework!
+
+Calculator with order of operations, built using Javascript, CSS grid, HTML. 
 
 [Live Preview](https://faithd186.github.io/calculator/)
 
