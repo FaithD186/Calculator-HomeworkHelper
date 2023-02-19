@@ -5,13 +5,15 @@ const clear = document.getElementById("clear")
 const operator = document.querySelectorAll(".operator")
 const paper = document.getElementById("paper")
 
-var operatorClick = false
-var equaled = false
-var line_counter = 0
-var expression_list = []
+let operatorClick = false
+let equaled = false
+let line_counter = 0
+let expression_list = []
+let num_clicked = false
 
 num.forEach(function(number){
     number.addEventListener("click", function(){
+        num_clicked = true
 
         if (!(equaled)){
             display.innerHTML += number.innerHTML
@@ -24,15 +26,22 @@ num.forEach(function(number){
 })
 operator.forEach(function(op){
     op.addEventListener("click", function(){
-        if (!(equaled) && !(operatorClick)){
+        if (!(equaled) && !(operatorClick) && num_clicked){
             display.innerHTML += op.innerHTML
-            operatorClick = true
+            num_clicked = false
+        }else if (!num_clicked && equaled){
+            display.innerHTML += op.innerHTML
+            equaled = false
         }
+        operatorClick = true
 
     })
 })
 
 equal.addEventListener("click", function(){
+    if (!num_clicked){
+        return
+    }
     if (line_counter === 15){
         paper.innerHTML = "Grade 1 Math Homework" + "<br />" + "<br />"
         line_counter = 0
@@ -92,6 +101,7 @@ equal.addEventListener("click", function(){
     paper.innerHTML += rslt + "<br />"
     line_counter += 1
     equaled = true
+    num_clicked = false
     expression_list = []
 
 })
