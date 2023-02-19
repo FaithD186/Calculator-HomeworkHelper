@@ -11,6 +11,7 @@ var foundnum1 = false
 var foundnum2 = false
 var equaled = false
 var line_counter = 0
+var expression_list = []
 
 num.forEach(function(number){
     number.addEventListener("click", function(){
@@ -74,77 +75,131 @@ operator.forEach(function(op){
 })
 
 equal.addEventListener("click", function(){
-    paper.innerHTML += display.innerHTML + " = "
-    rslt = eval(display.innerHTML)
-    display.innerHTML = rslt
-    paper.innerHTML += rslt + "<br />"
-    // calculate()
-    equaled = true
+    paper.innerHTML += display.innerHTML
+    let prev_num = false
+    let operators = "+/*-"
+    for(var i=0; i < display.innerHTML.length; i++)
+    {
+        // if previous was a number AND current is a number, APPEND to the prev one
+        // if previous was an operator or is first, add to the list (new item)
+        if (!expression_list || !prev_num || operators.includes(display.innerHTML[i])){
+            expression_list.push(display.innerHTML[i])
 
-    // operatorClick = false
-    // foundnum1 = false
-    // foundnum2 = false
-    // num1 = 0
-    // num2 = 0
+        }
+        else if (prev_num && !(operators.includes(display.innerHTML[i]))){
+            //previous index.
+            expression_list[expression_list.length - 1] += display.innerHTML[i]
+
+        }
+        if (!(operators.includes(display.innerHTML[i]))){
+            prev_num = true
+        }else{
+            prev_num = false
+        }
+        // expression_list.push(display.innerHTML[i])
+    }
+    console.log("full expression,", expression_list)
+    for (var j=0; j <= expression_list.length; j++){
+        if (expression_list[j] === "*"){
+            rslt = multiply(parseInt(expression_list[j-1]), parseInt(expression_list[j+1]))
+            expression_list[j] = rslt
+            expression_list.splice(j-1, 1)
+            expression_list.splice(j, 1)
+            console.log(expression_list)
+        }
+        else if (expression_list[j] === "/"){
+            rslt = divide(parseInt(expression_list[j-1]), parseInt(expression_list[j+1]))
+            expression_list[j] = rslt
+            expression_list.splice(j-1, 1)
+            expression_list.splice(j, 1)
+        }
+
+    }
+    for (var l = 0; l <= expression_list.length; l++){
+        for (var k = 0; k <= expression_list.length; k++){
+            if (expression_list[k] === "+"){
+                rslt = add(parseInt(expression_list[k-1]), parseInt(expression_list[k+1]))
+                expression_list[k] = rslt
+                expression_list.splice(k-1, 1)
+                expression_list.splice(k, 1)
+                console.log(expression_list)
+            }
+            else if (expression_list[k] === "-"){
+                rslt = subtract(parseInt(expression_list[k-1]), parseInt(expression_list[k+1]))
+                expression_list[k] = rslt
+                expression_list.splice(k-1, 1)
+                expression_list.splice(k, 1)
+                console.log(expression_list)
+            }
+        }
+
+    }
+    console.log(expression_list)
+    paper.innerHTML += " = "
+    display.innerHTML = expression_list[0]
+    paper.innerHTML += rslt + "<br />"
+    equaled = true
+    expression_list = []
+
 })
 
-function calculate(){
-    console.log("num1", num1)
-    console.log("num2", num2)
-    if (line_counter === 15){
-        paper.innerHTML = "Grade 1 Math Homework" + "<br />" + "<br />"
-        line_counter = 0
-    }
-    if (sign === "+"){
-        paper.innerHTML += num1
-        paper.innerHTML += " + "
-        paper.innerHTML += num2
-        console.log("calculating", num1, "+", num2)
-        rslt = add(parseInt(num1), parseInt(num2))
-        paper.innerHTML += " = "
-        paper.innerHTML += rslt + "<br />"
-        display.innerHTML = rslt
-        line_counter += 1
-        return rslt
-    }
-    else if (sign === "-"){
-        paper.innerHTML += num1
-        paper.innerHTML += " - "
-        paper.innerHTML += num2
-        console.log("calculating", num1, "-", num2)
-        rslt = subtract(parseInt(num1), parseInt(num2))
-        paper.innerHTML += " = "
-        paper.innerHTML += rslt + "<br />"
-        display.innerHTML = rslt
-        line_counter += 1
-        return rslt
-    }
-    else if (sign === "*"){
-        paper.innerHTML += num1
-        paper.innerHTML += " * "
-        paper.innerHTML += num2
-        console.log("calculating", num1, "*", num2)
-        rslt = multiply(parseInt(num1), parseInt(num2))
-        paper.innerHTML += " = "
-        paper.innerHTML += rslt + "<br />"
-        display.innerHTML = rslt
-        line_counter += 1
-        return rslt
-    }
-    else if (sign === "/"){
-        paper.innerHTML += num1
-        paper.innerHTML += " / "
-        paper.innerHTML += num2
-        console.log("calculating", num1, "/", num2)
-        rslt = divide(parseInt(num1), parseInt(num2))
-        paper.innerHTML += " = "
-        paper.innerHTML += rslt + "<br />"
-        display.innerHTML = rslt
-        line_counter += 1
-        return rslt
-    }
-
-}
+// function calculate(){
+//     console.log("num1", num1)
+//     console.log("num2", num2)
+//     if (line_counter === 15){
+//         paper.innerHTML = "Grade 1 Math Homework" + "<br />" + "<br />"
+//         line_counter = 0
+//     }
+//     if (sign === "+"){
+//         paper.innerHTML += num1
+//         paper.innerHTML += " + "
+//         paper.innerHTML += num2
+//         console.log("calculating", num1, "+", num2)
+//         rslt = add(parseInt(num1), parseInt(num2))
+//         paper.innerHTML += " = "
+//         paper.innerHTML += rslt + "<br />"
+//         display.innerHTML = rslt
+//         line_counter += 1
+//         return rslt
+//     }
+//     else if (sign === "-"){
+//         paper.innerHTML += num1
+//         paper.innerHTML += " - "
+//         paper.innerHTML += num2
+//         console.log("calculating", num1, "-", num2)
+//         rslt = subtract(parseInt(num1), parseInt(num2))
+//         paper.innerHTML += " = "
+//         paper.innerHTML += rslt + "<br />"
+//         display.innerHTML = rslt
+//         line_counter += 1
+//         return rslt
+//     }
+//     else if (sign === "*"){
+//         paper.innerHTML += num1
+//         paper.innerHTML += " * "
+//         paper.innerHTML += num2
+//         console.log("calculating", num1, "*", num2)
+//         rslt = multiply(parseInt(num1), parseInt(num2))
+//         paper.innerHTML += " = "
+//         paper.innerHTML += rslt + "<br />"
+//         display.innerHTML = rslt
+//         line_counter += 1
+//         return rslt
+//     }
+//     else if (sign === "/"){
+//         paper.innerHTML += num1
+//         paper.innerHTML += " / "
+//         paper.innerHTML += num2
+//         console.log("calculating", num1, "/", num2)
+//         rslt = divide(parseInt(num1), parseInt(num2))
+//         paper.innerHTML += " = "
+//         paper.innerHTML += rslt + "<br />"
+//         display.innerHTML = rslt
+//         line_counter += 1
+//         return rslt
+//     }
+//
+// }
 
 clear.addEventListener("click", function(){
     display.innerHTML = ""
