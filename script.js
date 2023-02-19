@@ -33,11 +33,14 @@ operator.forEach(function(op){
 })
 
 equal.addEventListener("click", function(){
+    if (line_counter === 15){
+        paper.innerHTML = "Grade 1 Math Homework" + "<br />" + "<br />"
+        line_counter = 0
+    }
     paper.innerHTML += display.innerHTML
     let prev_num = false
     let operators = "+/*-"
-    for(var i=0; i < display.innerHTML.length; i++)
-    {
+    for(var i=0; i < display.innerHTML.length; i++) {
         // if previous was a number AND current is a number, APPEND to the prev one
         // if previous was an operator or is first, add to the list (new item)
         if (!expression_list || !prev_num || operators.includes(display.innerHTML[i])){
@@ -45,21 +48,18 @@ equal.addEventListener("click", function(){
 
         }
         else if (prev_num && !(operators.includes(display.innerHTML[i]))){
-            //previous index.
             expression_list[expression_list.length - 1] += display.innerHTML[i]
 
         }
         prev_num = !(operators.includes(display.innerHTML[i]));
     }
 
-    console.log("full expression,", expression_list)
     for (var j=0; j <= expression_list.length; j++){
         if (expression_list[j] === "*"){
             rslt = multiply(parseInt(expression_list[j-1]), parseInt(expression_list[j+1]))
             expression_list[j] = rslt
             expression_list.splice(j-1, 1)
             expression_list.splice(j, 1)
-            console.log(expression_list)
         }
         else if (expression_list[j] === "/"){
             rslt = divide(parseInt(expression_list[j-1]), parseInt(expression_list[j+1]))
@@ -76,23 +76,17 @@ equal.addEventListener("click", function(){
                 expression_list[k] = rslt
                 expression_list.splice(k-1, 1)
                 expression_list.splice(k, 1)
-                console.log(expression_list)
             }
             else if (expression_list[k] === "-"){
                 rslt = subtract(parseInt(expression_list[k-1]), parseInt(expression_list[k+1]))
                 expression_list[k] = rslt
                 expression_list.splice(k-1, 1)
                 expression_list.splice(k, 1)
-                console.log(expression_list)
             }
         }
 
     }
 
-    if (line_counter === 15){
-         paper.innerHTML = "Grade 1 Math Homework" + "<br />" + "<br />"
-         line_counter = 0
-    }
     paper.innerHTML += " = "
     display.innerHTML = expression_list[0]
     paper.innerHTML += rslt + "<br />"
