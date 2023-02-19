@@ -10,7 +10,7 @@ let equal_clicked = false
 let line_counter = 0
 let expression_list = []
 let num_clicked = false
-// let is_first_input = true
+let is_first_input = true
 
 num.forEach(function(number){
     number.addEventListener("click", function(){
@@ -35,6 +35,7 @@ operator.forEach(function(op){
             equal_clicked = false
         }
         operator_clicked = true
+        is_first_input = false
 
     })
 })
@@ -46,10 +47,9 @@ equal.addEventListener("click", function(){
     if (equal_clicked && !operator_clicked){
         return
     }
-    // if (is_first_input && !operator_clicked){
-    //     is_first_input = false
-    //     return
-    // }
+    if (is_first_input && !operator_clicked){
+        return
+    }
     if (line_counter === 15){
         paper.innerHTML = "Grade 1 Math Homework" + "<br />" + "<br />"
         line_counter = 0
@@ -111,6 +111,7 @@ equal.addEventListener("click", function(){
     equal_clicked = true
     num_clicked = false
     expression_list = []
+    is_first_input = true
 
 })
 
