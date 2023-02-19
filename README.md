@@ -1,4 +1,4 @@
-# calculator
+# Calculator with Order of Operations
 
 Help a first grader with their math homework!
 
