@@ -5,35 +5,36 @@ const clear = document.getElementById("clear")
 const operator = document.querySelectorAll(".operator")
 const paper = document.getElementById("paper")
 
-let operatorClick = false
-let equaled = false
+let operator_clicked = false
+let equal_clicked = false
 let line_counter = 0
 let expression_list = []
 let num_clicked = false
+// let is_first_input = true
 
 num.forEach(function(number){
     number.addEventListener("click", function(){
         num_clicked = true
 
-        if (!(equaled)){
+        if (!(equal_clicked)){
             display.innerHTML += number.innerHTML
         }else{
-            equaled = false
+            equal_clicked = false
             display.innerHTML = number.innerHTML
         }
-        operatorClick = false
+        operator_clicked = false
     })
 })
 operator.forEach(function(op){
     op.addEventListener("click", function(){
-        if (!(equaled) && !(operatorClick) && num_clicked){
+        if (!(equal_clicked) && !(operator_clicked) && num_clicked){
             display.innerHTML += op.innerHTML
             num_clicked = false
-        }else if (!num_clicked && equaled){
+        }else if (!num_clicked && equal_clicked){
             display.innerHTML += op.innerHTML
-            equaled = false
+            equal_clicked = false
         }
-        operatorClick = true
+        operator_clicked = true
 
     })
 })
@@ -42,6 +43,13 @@ equal.addEventListener("click", function(){
     if (!num_clicked){
         return
     }
+    if (equal_clicked && !operator_clicked){
+        return
+    }
+    // if (is_first_input && !operator_clicked){
+    //     is_first_input = false
+    //     return
+    // }
     if (line_counter === 15){
         paper.innerHTML = "Grade 1 Math Homework" + "<br />" + "<br />"
         line_counter = 0
@@ -100,7 +108,7 @@ equal.addEventListener("click", function(){
     display.innerHTML = expression_list[0]
     paper.innerHTML += rslt + "<br />"
     line_counter += 1
-    equaled = true
+    equal_clicked = true
     num_clicked = false
     expression_list = []
 
@@ -108,7 +116,7 @@ equal.addEventListener("click", function(){
 
 clear.addEventListener("click", function(){
     display.innerHTML = ""
-    operatorClick = false
+    operator_clicked = false
 
 })
 
